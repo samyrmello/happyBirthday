@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #ffeef4 0%, #ffd1e3 100%);
+            --text-main: #333333;
+            --accent-pink: #ff4fa3;
+            --accent-red: #d92b4b;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --festive-opacity: 0.95;
+        }
+
+        body.amarelo {
+            --bg-gradient: linear-gradient(135deg, #faf0e6 0%, #eddcd2 100%);
+            --text-main: #3e2723;
+            --accent-pink: #dd6b20;
+            --accent-red: #9c4221;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --festive-opacity: 0.85;
+        }
+
+        body.azul {
+            --bg-gradient: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            --text-main: #0f172a;
+            --accent-pink: #0284c7;
+            --accent-red: #0369a1;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --festive-opacity: 0.9;
+        }
+
+        body.violeta {
+            --bg-gradient: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+            --text-main: #1e1b4b;
+            --accent-pink: #7e22ce;
+            --accent-red: #6b21a8;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --festive-opacity: 0.9;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
+            transition: all 0.5s ease;
+        }
+
+        .cursive-title {
+            font-family: 'Great Vibes', cursive;
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(255, 79, 163, 0.08);
+        }
+
+        .theme-btn {
+            background: linear-gradient(135deg, var(--accent-pink) 0%, var(--accent-red) 100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .theme-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(217, 43, 75, 0.3);
+        }
+
+        .festive-element {
+            position: absolute;
+            pointer-events: none;
+            opacity: var(--festive-opacity);
+            transition: opacity 0.5s ease;
+            z-index: 0;
+            filter: drop-shadow(0 6px 10px rgba(0,0,0,0.12));
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0px) rotate(0deg) scale(1); }
+            50% { transform: translateY(-25px) rotate(10deg) scale(1.08); }
+            100% { transform: translateY(0px) rotate(0deg) scale(1); }
+        }
+
+        .animate-float {
+            animation: floatUp 5s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="relative antialiased pb-12 overflow-x-hidden">
+
+<button id="soundBtn" class="fixed top-5 right-5 z-50 w-12 h-12 rounded-full glass-card flex items-center justify-center text-xl cursor-pointer text-[#d92b4b] hover:scale-110 transition-transform">
+    <i class="fas fa-volume-mute"></i>
+</button>
+
+<audio id="audio" loop>
+    <source src="WhatsApp Audio 2026-06-25 at 15.01.41.mpeg" type="audio/aac">
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div id="festive-bg" class="absolute inset-0 pointer-events-none overflow-hidden">
+    <div class="festive-element animate-float text-8xl md:text-9xl top-[4%] left-[2%]" style="animation-delay: 0s;">🎈</div>
+    <div class="festive-element animate-float text-9xl md:text-9xl top-[38%] right-[2%] hidden sm:block" style="animation-delay: 1.5s;">🎈</div>
+    <div class="festive-element animate-float text-8xl md:text-9xl bottom-[15%] left-[3%]" style="animation-delay: 3s;">🎈</div>
+    <div class="festive-element animate-float text-9xl md:text-9xl bottom-[6%] right-[2%]" style="animation-delay: 0.5s;">🎈</div>
+
+    <div class="festive-element animate-float text-[#d92b4b] text-7xl md:text-8xl font-black top-[2%] right-[8%]" style="animation-delay: 2s; font-family: 'Great Vibes', cursive;">17</div>
+    <div class="festive-element animate-float text-[#ff4fa3] text-7xl md:text-8xl font-black bottom-[45%] left-[1%]" style="animation-delay: 4s; font-family: 'Great Vibes', cursive;">17</div>
+    <div class="festive-element animate-float text-red-400 text-8xl md:text-9xl font-black bottom-[22%] right-[10%] hidden md:block" style="animation-delay: 1s; font-family: 'Great Vibes', cursive;">17</div>
+
+    <div class="festive-element animate-float text-6xl top-[20%] left-[6%] hidden sm:block" style="animation-delay: 2.5s;">🍰</div>
+    <div class="festive-element animate-float text-6xl bottom-[52%] right-[6%]" style="animation-delay: 0.8s;">🎂</div>
+    <div class="festive-element animate-float text-6xl bottom-[28%] left-[8%] hidden sm:block" style="animation-delay: 3.2s;">🍾</div>
+
+    <div class="festive-element animate-float text-6xl top-[16%] right-[18%]" style="animation-delay: 1.2s;">🥳</div>
+    <div class="festive-element animate-float text-7xl top-[58%] left-[2%]" style="animation-delay: 2.1s;">🎉</div>
+    <div class="festive-element animate-float text-6xl top-[48%] right-[14%] hidden md:block" style="animation-delay: 4.5s;">✨</div>
+    <div class="festive-element animate-float text-6xl bottom-[4%] left-[25%]" style="animation-delay: 1.7s;">⭐</div>
+</div>
+
+<main class="relative z-10 max-w-lg mx-auto px-4 pt-12 flex flex-col items-center">
+    <div class="w-full glass-card rounded-3xl p-8 text-center border-2 border-white relative overflow-hidden mb-8">
+        <div class="absolute inset-4 border border-red-300/30 rounded-2xl transform rotate-3 pointer-events-none"></div>
+        <div class="absolute inset-4 border border-pink-400/20 rounded-2xl transform -rotate-3 pointer-events-none"></div>
+        
+        <h2 class="text-3xl text-gray-700 font-light tracking-wide mb-1">Feliz</h2>
+        <h1 class="cursive-title text-6xl text-[#d92b4b] drop-shadow-sm my-2">Aniversário</h1>
+        <h3 class="text-2xl font-bold tracking-widest text-[#ff4fa3] mt-2 uppercase">Heloísa</h3>
+    </div>
+
+    <div class="w-full flex flex-col gap-4 px-2">
+        <button class="theme-btn text-white font-semibold py-4 px-6 rounded-2xl flex items-center justify-between text-lg cursor-pointer" onclick="openModal('themesModal')">
+            <span><i class="fas fa-palette mr-3"></i> Escolher Tema</span>
+            <i class="fas fa-chevron-right text-sm opacity-70"></i>
+        </button>
+
+        <button class="theme-btn text-white font-semibold py-4 px-6 rounded-2xl flex items-center justify-between text-lg cursor-pointer" onclick="openModal('giftModal')">
+            <span><i class="fas fa-gift mr-3"></i> Sortear Presente</span>
+            <i class="fas fa-chevron-right text-sm opacity-70"></i>
+        </button>
+
+        <button class="theme-btn text-white font-semibold py-4 px-6 rounded-2xl flex items-center justify-between text-lg cursor-pointer" onclick="openModal('letterModal')">
+            <span><i class="fas fa-envelope-open-text mr-3"></i> Carta</span>
+            <i class="fas fa-chevron-right text-sm opacity-70"></i>
+        </button>
+    </div>
+</main>
+
+<div id="themesModal" class="modal fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-50 justify-center items-center p-4">
+    <div class="glass-card w-full max-w-sm rounded-3xl p-6 text-center shadow-2xl scale-95 transition-transform duration-300">
+        <h2 class="text-xl font-bold mb-6"><i class="fas fa-magic mr-2 text-[#ff4fa3]"></i> Escolha a Atmosfera</h2>
+        <div class="flex flex-col gap-3">
+            <button class="w-full py-3 bg-white/80 hover:bg-white text-gray-800 font-medium rounded-xl border border-pink-200 transition-colors cursor-pointer" onclick="setTheme('')">
+                🌸 Rosa
+            </button>
+            <button class="w-full py-3 bg-[#fff1e6] text-[#9c4221] font-medium rounded-xl hover:bg-[#f7e1d1] transition-colors cursor-pointer" onclick="setTheme('amarelo')">
+                🌻 Amarelo
+            </button>
+            <button class="w-full py-3 bg-[#e0f2fe] text-[#0369a1] font-medium rounded-xl hover:bg-[#bae6fd] transition-colors cursor-pointer" onclick="setTheme('azul')">
+                💎 Azul
+            </button>
+            <button class="w-full py-3 bg-[#f3e8ff] text-[#6b21a8] font-medium rounded-xl hover:bg-[#e9d5ff] transition-colors cursor-pointer" onclick="setTheme('violeta')">
+                🔮 Violeta
+            </button>
+        </div>
+        <button class="mt-6 text-sm text-gray-500 hover:text-gray-800 underline cursor-pointer" onclick="closeModal('themesModal')">Fechar</button>
+    </div>
+</div>
+
+<div id="giftModal" class="modal fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-50 justify-center items-center p-4">
+    <div class="glass-card w-full max-w-sm rounded-3xl p-6 text-center shadow-2xl">
+        <h2 class="text-xl font-bold mb-4"><i class="fas fa-star mr-2 text-yellow-500"></i> O que você ganhou?</h2>
+        
+        <div class="w-full min-h-[220px] bg-gray-100/60 rounded-2xl flex flex-col items-center justify-center overflow-hidden mb-4 border border-gray-200 p-3 relative">
+            <p id="congratsText" class="text-2xl font-black text-[#d92b4b] mb-3 hidden uppercase tracking-wide animate-bounce">parabéns!</p>
+            
+            <div id="countdown" class="text-5xl font-black text-[#ff4fa3] hidden animate-pulse">3</div>
+            
+            <div id="giftImagesContainer" class="flex gap-2 justify-center items-center w-full hidden">
+                <img id="giftImg1" src="" class="h-40 w-1/2 object-cover rounded-xl shadow-md border border-white transition-all duration-300 cursor-pointer" onclick="zoomImage(this.src)">
+                <img id="giftImg2" src="" class="h-40 w-1/2 object-cover rounded-xl shadow-md border border-white transition-all duration-300 hidden cursor-pointer" onclick="zoomImage(this.src)">
+            </div>
+            
+            <p id="receiveText" class="text-base font-bold text-gray-700 mt-3 hidden italic">hora de recebê-los!</p>
+
+            <div id="giftPlaceholder" class="text-gray-400 flex flex-col items-center">
+                <i class="fas fa-box-open text-5xl mb-2 animate-pulse text-[#ff4fa3]"></i>
+                <p class="text-sm font-medium">Clique abaixo para descobrir</p>
+            </div>
+        </div>
+        
+        <button id="drawBtn" class="theme-btn text-white w-full py-3 rounded-xl font-semibold cursor-pointer mb-3 shadow-md" onclick="sortear()">
+            <i class="fas fa-dice mr-2"></i> Sortear Vale-Presente
+        </button>
+        <button class="text-sm text-gray-500 hover:text-gray-800 underline cursor-pointer" onclick="closeModal('giftModal')">Fechar</button>
+    </div>
+</div>
+
+<div id="letterModal" class="modal fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-50 justify-center items-center p-4">
+    <div class="glass-card w-full max-w-sm rounded-3xl p-6 text-center shadow-2xl max-h-[85vh] flex flex-col">
+        <h2 class="text-xl font-bold mb-4 text-[#d92b4b]"> De: Sêmen, Para: Você</h2>
+        <div class="overflow-y-auto text-left text-gray-700 leading-relaxed space-y-3 my-2 pr-1 text-sm md:text-base flex-1">
+            <p class="font-semibold">Heloísa,</p>
+            <p>Queria lhe parabenizar por completar mais um ano de vida. Que nesta nova fase você possa ser muito feliz consigo mesma e com as suas pessoas favoritas. Desejo a você prosperidade, paz e força. Espero que você continue com esse seu bom senso de humor, levando alegria com sua energia e sorriso. Aproveite bem o seu dia e os seus 17 anos! Parabéns! — Helô</p>
+            <p></p>
+            <p class="text-right font-semibold text-[#d92b4b] mt-4">Com programação: Samyr.</p>
+        </div>
+        <button class="mt-4 pt-2 border-t border-gray-200/50 text-sm text-gray-500 hover:text-gray-800 underline cursor-pointer" onclick="closeModal('letterModal')">Fechar</button>
+    </div>
+</div>
+
+<div id="zoomModal" class="fixed inset-0 bg-black/95 backdrop-blur-md hidden z-[60] justify-center items-center p-2 md:p-4 cursor-zoom-out" onclick="closeZoom()">
+    <div class="relative max-w-full max-h-[90vh] flex items-center justify-center">
+        <img id="zoomedImg" src="" class="max-w-[95vw] max-h-[85vh] md:max-h-[90vh] object-contain rounded-xl shadow-2xl border-2 border-white/20 transform scale-50 transition-transform duration-300 ease-out">
+        <button class="absolute top-[-45px] right-2 text-white text-3xl hover:text-gray-300 cursor-pointer"><i class="fas fa-times"></i></button>
+    </div>
+</div>
+
+<script>
+let soundOn = false;
+const audio = document.getElementById("audio");
+
+document.getElementById("soundBtn").onclick = () => {
+    soundOn = !soundOn;
+    const icon = document.getElementById("soundBtn").querySelector("i");
+    
+    if(soundOn){
+        audio.play()
+            .then(() => {
+                icon.className = "fas fa-volume-up text-green-500";
+            })
+            .catch(e => {
+                console.log("Erro de reprodução nativa:", e);
+                soundOn = false;
+                icon.className = "fas fa-volume-mute text-[#d92b4b]";
+                alert("O navegador bloqueou ou não suporta o áudio atual. Certifique-se de que o arquivo 'WhatsApp Audio 2026-06-23 at 09.30.22.aac' ou um plano B chamado 'music.mp3' está salvo na MESMA pasta deste arquivo HTML.");
+            });
+    } else {
+        audio.pause();
+        icon.className = "fas fa-volume-mute text-[#d92b4b]";
+    }
+};
+
+function openModal(id) {
+    document.getElementById(id).style.display = "flex";
+}
+
+function closeModal(id) {
+    document.getElementById(id).style.display = "none";
+}
+
+function setTheme(themeName){
+    document.body.className = "relative antialiased pb-12 " + themeName;
+}
+
+/* SISTEMA DE ZOOM COM ANIMAÇÃO POP-UP MELHORADA */
+function zoomImage(src) {
+    const zoomModal = document.getElementById("zoomModal");
+    const zoomedImg = document.getElementById("zoomedImg");
+    
+    zoomedImg.style.transform = "scale(0.5)"; // Começa pequena
+    zoomedImg.src = src;
+    zoomModal.style.display = "flex";
+    
+    setTimeout(() => { 
+        zoomedImg.style.transform = "scale(1)"; // Expande para o tamanho máximo na tela
+    }, 50);
+}
+
+function closeZoom() {
+    const zoomModal = document.getElementById("zoomModal");
+    const zoomedImg = document.getElementById("zoomedImg");
+    
+    zoomedImg.style.transform = "scale(0.5)"; // Encolhe ao fechar
+    setTimeout(() => { 
+        zoomModal.style.display = "none"; 
+    }, 200);
+}
+
+/* SISTEMA DE SORTEIO DINÂMICO */
+const fotoPresente1 = "Captura de tela 2026-06-22 164250.png";
+const fotoPresente2 = "Captura de tela 2026-06-22 164307.png";
+
+let drawCount = 0;
+let isDrawing = false;
+
+function sortear(){
+    if(isDrawing) return; 
+
+    const placeholder = document.getElementById("giftPlaceholder");
+    const countdown = document.getElementById("countdown");
+    const container = document.getElementById("giftImagesContainer");
+    const img1 = document.getElementById("giftImg1");
+    const img2 = document.getElementById("giftImg2");
+    const congrats = document.getElementById("congratsText");
+    const receive = document.getElementById("receiveText");
+    const btn = document.getElementById("drawBtn");
+
+    isDrawing = true;
+    placeholder.classList.add('hidden');
+    container.classList.add('hidden');
+    congrats.classList.add('hidden');
+    receive.classList.add('hidden');
+    
+    countdown.classList.remove('hidden');
+    btn.disabled = true;
+    btn.style.opacity = "0.6";
+
+    let currentSeconds = 3;
+    countdown.innerText = currentSeconds;
+
+    const interval = setInterval(() => {
+        currentSeconds--;
+        if(currentSeconds > 0) {
+            countdown.innerText = currentSeconds;
+        } else {
+            clearInterval(interval);
+            countdown.classList.add('hidden');
+            container.classList.remove('hidden');
+            
+            drawCount++;
+
+            if(drawCount === 1) {
+                img1.src = fotoPresente1;
+                img1.classList.remove('hidden');
+                img1.className = "h-40 w-full object-cover rounded-xl shadow-md border border-white transition-all duration-300 cursor-pointer";
+                img2.classList.add('hidden');
+                
+                btn.innerHTML = '<i class="fas fa-dice mr-2"></i> Sortear Segundo Presente';
+                btn.disabled = false;
+                btn.style.opacity = "1";
+            } else if(drawCount >= 2) {
+                img1.className = "h-40 w-1/2 object-cover rounded-xl shadow-md border border-white transition-all duration-300 cursor-pointer";
+                img2.src = fotoPresente2;
+                img2.classList.remove('hidden');
+                
+                congrats.classList.remove('hidden');
+                receive.classList.remove('hidden');
+                
+                btn.innerHTML = '<i class="fas fa-check-circle mr-2"></i> Todos os Presentes Resgatados!';
+                btn.style.background = "linear-gradient(135deg, #10B981 0%, #059669 100%)";
+            }
+            isDrawing = false;
+        }
+    }, 1000);
+}
+</script>
+
+</body>
+</html>
